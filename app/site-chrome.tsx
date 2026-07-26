@@ -57,12 +57,25 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
 export function SiteFooter() {
   const { language } = useLanguage();
   return (
-    <footer className="bg-yellow px-5 py-12 text-ink sm:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 md:flex-row">
-        <div><div className="brand"><span className="brand-cube"><span className="brand-mark brand-front">ታ</span><span className="brand-mark brand-back">T</span></span><span><b>ታቦር / TABOR</b><small>ማተሚያ ቤት / PRINTING PRESS</small></span></div><p className="mt-5 max-w-md font-semibold">{language === "am" ? "ሀሳቦችን በቀለም፣ በወረቀትና በጥራት እውን እናደርጋለን።" : "Ideas made tangible through color, paper, craft, and care."}</p></div>
-        <div className="grid gap-2 text-sm font-black uppercase"><Link href="/about">About / ስለ እኛ</Link><Link href="/gallery">Gallery / ጋለሪ</Link><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com</a><span>Hawassa, Ethiopia</span></div>
+    <footer className="modern-footer">
+      <div className="footer-cta">
+        <div>
+          <span>{language === "am" ? "ቀጣዩ ፕሮጀክትዎ" : "Your next project"}</span>
+          <h2>{language === "am" ? "አንድ ላይ እናትም።" : "Let’s make it tangible."}</h2>
+        </div>
+        <a href="mailto:hello@taborprintingpress.com">{language === "am" ? "ያግኙን" : "Start a conversation"} <b>↗</b></a>
       </div>
-      <div className="mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-3 border-t-2 border-ink pt-6 text-xs font-extrabold uppercase tracking-[.12em] sm:flex-row">
+      <div className="footer-main">
+        <div className="footer-intro">
+          <div className="brand footer-brand"><span className="footer-logo">ታ</span><span><b>ታቦር / TABOR</b><small>ማተሚያ ቤት / PRINTING PRESS</small></span></div>
+          <p>{language === "am" ? "ሀሳቦችን በቀለም፣ በወረቀትና በጥራት እውን እናደርጋለን።" : "Ideas made tangible through color, paper, craft, and care."}</p>
+          <div className="footer-swatches"><i /><i /><i /><i /></div>
+        </div>
+        <div className="footer-column"><span>Explore</span><Link href="/">Home</Link><Link href="/about">About</Link><Link href="/gallery">Gallery</Link></div>
+        <div className="footer-column"><span>Services</span><Link href="/#services">Offset print</Link><Link href="/#services">Digital print</Link><Link href="/#services">Packaging</Link></div>
+        <div className="footer-column footer-contact"><span>Say hello</span><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com</a><p>Hawassa, Ethiopia</p></div>
+      </div>
+      <div className="footer-bottom">
         <p>© {new Date().getFullYear()} Tabor Printing Press. All rights reserved.</p>
         <p>Developed by <a className="developer-link" href="https://fasik1377.github.io/fasika-abera/" target="_blank" rel="noreferrer">Fasika Abera ↗</a></p>
       </div>

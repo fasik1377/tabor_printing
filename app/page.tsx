@@ -90,7 +90,13 @@ export default function Home() {
           <div>
             <p className="kicker">{t.eyebrow}</p>
             <h1 className="hero-title mt-6 max-w-4xl text-[clamp(4.7rem,11vw,9.5rem)] font-black uppercase leading-[.76] tracking-[-.075em]" data-text={t.title}>
-              <span>{t.title}</span>
+              <span className="brush-letters">{t.title}</span>
+              <span className="hero-brush-3d" aria-hidden="true">
+                <i className="brush-handle" />
+                <i className="brush-ferrule" />
+                <i className="brush-bristles" />
+                <i className="brush-ink-drop" />
+              </span>
             </h1>
             <p className="mt-8 max-w-xl text-lg font-semibold leading-8 sm:text-xl">{t.lead}</p>
             <div className="mt-9 flex flex-wrap gap-4">
@@ -121,7 +127,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="services" className="bg-ink px-5 py-28 text-white sm:px-8">
+      <section id="services" className="services-section bg-ink px-5 py-28 text-white sm:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="section-label text-yellow">{t.servicesLabel}</p>
           <div className="mt-5 grid gap-8 lg:grid-cols-[1fr_.7fr] lg:items-end">
@@ -129,7 +135,7 @@ export default function Home() {
             <p className="max-w-xl text-lg font-medium leading-8 text-white/65">{t.servicesLead}</p>
           </div>
           <div className="mt-16 grid gap-px border border-white/20 bg-white/20 sm:grid-cols-2 lg:grid-cols-3">
-            {t.services.map((service, index) => <div key={service} className="service-card group"><span>0{index + 1}</span><h3>{service}</h3><b>↗</b></div>)}
+            {t.services.map((service, index) => <div key={service} className="service-card group"><span>0{index + 1}</span><i className={`service-icon service-icon-${index + 1}`} /><h3>{service}</h3><p>{language === "am" ? "ከዲዛይን እስከ ማጠናቀቅ በጥራት የሚሰራ።" : "Designed, produced, and finished with close attention to every detail."}</p><b>↗</b></div>)}
           </div>
         </div>
       </section>
@@ -159,20 +165,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-yellow px-5 py-28 sm:px-8">
+      <section className="process-section bg-yellow px-5 py-28 sm:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="section-label">{t.processLabel}</p>
-          <h2 className="display-title mt-4 max-w-5xl">{t.processTitle}</h2>
-          <div className="mt-14 grid border-l-2 border-t-2 border-ink md:grid-cols-4">
-            {t.steps.map(([title, text]) => <article className="process-card" key={title}><span>{title}</span><p>{text}</p></article>)}
+          <div className="process-heading">
+            <div><p className="section-label">{t.processLabel}</p><h2 className="display-title mt-4 max-w-5xl">{t.processTitle}</h2></div>
+            <div className="process-seal"><span>01</span><i>→</i><span>04</span><small>{language === "am" ? "ግልጽ ሂደት" : "ONE CLEAR FLOW"}</small></div>
           </div>
+          <div className="process-track mt-16">
+            {t.steps.map(([title, text], index) => <article className="process-card" key={title}><div className={`process-icon process-icon-${index + 1}`}><i /><b>{index + 1}</b></div><span>{title}</span><p>{text}</p><em>{index < t.steps.length - 1 ? "→" : "✓"}</em></article>)}
+          </div>
+          <div className="process-note"><span>{language === "am" ? "አንድ ሀሳብ" : "ONE IDEA"}</span><i /><span>{language === "am" ? "ዝግጁ ህትመት" : "PRINT READY"}</span></div>
         </div>
       </section>
 
-      <section id="contact" className="bg-ink px-5 py-24 text-white sm:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-          <h2 className="max-w-4xl text-5xl font-black uppercase leading-[.92] sm:text-7xl">{t.ready}</h2>
-          <a href="mailto:hello@taborprintingpress.com" className="button button-yellow shrink-0">{t.contact} ↗</a>
+      <section id="contact" className="contact-section bg-ink px-5 py-24 text-white sm:px-8">
+        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.8fr_1fr]">
+          <div>
+            <p className="section-label text-yellow">Contact / ያግኙን</p>
+            <h2 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[.92] sm:text-7xl">{t.ready}</h2>
+            <p className="mt-7 max-w-lg text-lg leading-8 text-white/60">{language === "am" ? "ስለ ህትመትዎ መጠን፣ ብዛትና የጊዜ ገደብ ይንገሩን። በተግባራዊ ምክር እንመለሳለን።" : "Tell us the size, quantity, and timing of your print job. We’ll reply with practical guidance and a clear next step."}</p>
+            <div className="contact-details"><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com ↗</a><a href="tel:+251000000000">+251 000 000 000 ↗</a><span>Hawassa, Ethiopia</span></div>
+          </div>
+          <form className="quote-form" onSubmit={(event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            const subject = encodeURIComponent(`Print quote: ${data.get("project")}`);
+            const body = encodeURIComponent(`Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nProject: ${data.get("project")}\n\n${data.get("message")}`);
+            window.location.href = `mailto:hello@taborprintingpress.com?subject=${subject}&body=${body}`;
+          }}>
+            <div className="form-row"><label>{language === "am" ? "ስም" : "Your name"}<input name="name" required placeholder={language === "am" ? "ሙሉ ስም" : "Full name"} /></label><label>{language === "am" ? "ስልክ" : "Phone"}<input name="phone" required placeholder="+251..." /></label></div>
+            <label>{language === "am" ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging"><option>Packaging</option><option>Business stationery</option><option>Posters & banners</option><option>Books & school materials</option><option>Other</option></select></label>
+            <label>{language === "am" ? "ዝርዝር" : "Project details"}<textarea name="message" required rows={4} placeholder={language === "am" ? "መጠን፣ ብዛት፣ ጊዜ..." : "Size, quantity, deadline..."} /></label>
+            <button className="button button-yellow" type="submit">{t.contact} ↗</button>
+          </form>
         </div>
       </section>
       <SiteFooter />

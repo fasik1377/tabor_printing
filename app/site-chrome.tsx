@@ -37,7 +37,16 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
   const t = nav[language];
   return (
     <header className={`site-header relative z-50 ${dark ? "text-white" : "text-ink"}`}>
-      <Link href="/" className="brand"><span className="brand-cube"><span className="brand-mark brand-front">ታ</span><span className="brand-mark brand-back">T</span><span className="brand-side brand-left" /><span className="brand-side brand-right" /><span className="brand-side brand-top" /><span className="brand-side brand-bottom" /><span className="brand-ink" /></span><span><b>{language === "am" ? "ታቦር" : "TABOR"}</b><small>{language === "am" ? "ማተሚያ ቤት" : "PRINTING PRESS"}</small></span></Link>
+      <Link href="/" className="brand">
+        <span className="print-logo" aria-hidden="true">
+          <span className="print-roller"><span>ታ</span></span>
+          <span className="roller-arm" />
+          <span className="ink-trail" />
+          <span className="ink-spark ink-spark-one" />
+          <span className="ink-spark ink-spark-two" />
+        </span>
+        <span><b>{language === "am" ? "ታቦር" : "TABOR"}</b><small>{language === "am" ? "ማተሚያ ቤት" : "PRINTING PRESS"}</small></span>
+      </Link>
       <nav aria-label="Primary navigation">
         <Link className={pathname === "/" ? "active" : ""} href="/">{t.home}</Link>
         <Link className={pathname === "/about" ? "active" : ""} href="/about">{t.about}</Link>

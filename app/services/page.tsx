@@ -17,10 +17,28 @@ export default function ServicesPage() {
   const { language } = useLanguage();
   const am = language === "am";
   return <main className="bg-cream text-ink">
-    <section className="services-page-hero"><SiteHeader /><div className="mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8">
-      <p className="kicker">{am ? "ከሀሳብ እስከ ህትመት" : "From idea to finished piece"}</p>
-      <div className="mt-7 grid gap-8 lg:grid-cols-[1fr_.62fr] lg:items-end"><h1 className="page-title">{am ? "ለእያንዳንዱ ሀሳብ ትክክለኛው ህትመት።" : "The right print for every idea."}</h1><p className="max-w-xl text-xl font-semibold leading-9">{am ? "ዲዛይን፣ ህትመት፣ ማጠናቀቅና ማድረስ—ሁሉም በአንድ ቦታ።" : "Design support, production, finishing, and delivery—handled as one clear, dependable process."}</p></div>
-    </div></section>
+    <section className="services-page-hero">
+      <Image src="https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=2000&q=90" alt="" fill priority sizes="100vw" className="inner-hero-background object-cover" />
+      <div className="inner-hero-wash services-hero-wash" />
+      <SiteHeader dark />
+      <div className="services-hero-ink" aria-hidden="true"><i /><i /><i /><i /></div>
+      <div className="services-hero-layout mx-auto max-w-7xl px-5 pb-24 pt-14 sm:px-8">
+        <div className="services-hero-copy">
+          <p className="kicker inner-hero-kicker">{am ? "ከሀሳብ እስከ ህትመት" : "From idea to finished piece"}</p>
+          <h1 className="page-title inner-painted-title mt-7">{am ? "ለእያንዳንዱ ሀሳብ ትክክለኛው ህትመት።" : "The right print for every idea."}</h1>
+          <p className="inner-hero-lead mt-8 max-w-xl text-xl font-semibold leading-9">{am ? "ዲዛይን፣ ህትመት፣ ማጠናቀቅና ማድረስ—ሁሉም በአንድ ቦታ።" : "Design support, production, finishing, and delivery—handled as one clear, dependable process."}</p>
+          <div className="hero-paint-tool hero-paint-roller" aria-hidden="true"><span /><i /><b /></div>
+        </div>
+        <div className="services-hero-machine" aria-label="Animated print samples">
+          <div className="print-sheet print-sheet-back"><Image src={services[2][4]} alt="" fill sizes="40vw" className="object-cover" /></div>
+          <div className="print-sheet print-sheet-middle"><Image src={services[1][4]} alt="" fill sizes="40vw" className="object-cover" /></div>
+          <div className="print-sheet print-sheet-front"><Image src={services[0][4]} alt="Colorful printed materials" fill priority sizes="(min-width:1024px) 40vw, 88vw" className="object-cover" /><span>PRINT / 01—06</span></div>
+          <div className="print-roller-hero"><i /><b>ታ</b></div>
+          <div className="print-register-marks"><i /><i /><i /><i /></div>
+        </div>
+      </div>
+      <div className="services-hero-marquee"><div>OFFSET ✦ DIGITAL ✦ PACKAGING ✦ STATIONERY ✦ BOOKS ✦ LARGE FORMAT ✦ OFFSET ✦ DIGITAL ✦ PACKAGING ✦ STATIONERY ✦ BOOKS ✦ LARGE FORMAT ✦</div></div>
+    </section>
     <section className="services-showcase px-5 py-28 sm:px-8"><div className="mx-auto max-w-7xl">
       {services.map(([en, amharic, text, amText, image, tag], index) => <article className="service-feature" key={en}>
         <div className="service-feature-copy"><span>0{index + 1} / 06</span><h2>{am ? amharic : en}</h2><p>{am ? amText : text}</p><small>{tag}</small></div>

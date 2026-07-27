@@ -51,8 +51,8 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
         <Link className={pathname === "/" ? "active" : ""} href="/">{t.home}</Link>
         <Link className={pathname === "/about" ? "active" : ""} href="/about">{t.about}</Link>
         <Link className={pathname === "/gallery" ? "active" : ""} href="/gallery">{t.gallery}</Link>
-        <Link href="/#services">{t.services}</Link>
-        <Link href="/#contact">{t.contact}</Link>
+        <Link className={pathname === "/services" ? "active" : ""} href="/services">{t.services}</Link>
+        <Link className={pathname === "/contact" ? "active" : ""} href="/contact">{t.contact}</Link>
       </nav>
       <div className="language-switch" aria-label="Language selector">
         <button className={language === "en" ? "selected" : ""} onClick={() => setLanguage("en")}>EN</button>
@@ -81,8 +81,8 @@ export function SiteFooter() {
           <div className="footer-swatches"><i /><i /><i /><i /></div>
         </div>
         <div className="footer-column"><span>Explore</span><Link href="/">Home</Link><Link href="/about">About</Link><Link href="/gallery">Gallery</Link></div>
-        <div className="footer-column"><span>Services</span><Link href="/#services">Offset print</Link><Link href="/#services">Digital print</Link><Link href="/#services">Packaging</Link></div>
-        <div className="footer-column footer-contact"><span>Say hello</span><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com</a><p>Hawassa, Ethiopia</p></div>
+        <div className="footer-column"><span>Services</span><Link href="/services">Offset print</Link><Link href="/services">Digital print</Link><Link href="/services">Packaging</Link></div>
+        <div className="footer-column footer-contact"><span>Say hello</span><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com</a><Link href="/contact">Hawassa, Ethiopia</Link></div>
       </div>
       <div className="footer-bottom">
         <p>© {new Date().getFullYear()} Tabor Printing Press. All rights reserved.</p>

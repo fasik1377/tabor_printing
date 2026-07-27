@@ -196,3 +196,69 @@ a,button { -webkit-tap-highlight-color:transparent; }
 @keyframes brush-drip { 0%,38% { opacity:0; transform:translateY(0) scale(.4); } 52% { opacity:1; transform:translateY(4px) scale(1); } 74%,100% { opacity:0; transform:translateY(25px) scale(.25); } }
 @keyframes process-seal { 0%,100% { transform:rotate(6deg) translateY(0); } 50% { transform:rotate(-5deg) translateY(-9px); } }
 @keyframes process-line { to { background-position:28px 0; } }
+
+/* Dedicated services page */
+.services-page-hero { position:relative; overflow:hidden; background:var(--yellow); background-image:radial-gradient(circle at 82% 32%,rgba(255,255,255,.9) 0 3px,transparent 4px); background-size:32px 32px; }
+.services-page-hero::after { content:""; position:absolute; right:-9rem; bottom:-13rem; width:34rem; height:34rem; border:6rem solid var(--magenta); border-radius:50%; opacity:.24; pointer-events:none; }
+.services-showcase { background:#f5f0e5; }
+.service-feature { display:grid; grid-template-columns:.75fr 1.25fr; min-height:510px; border:2px solid var(--ink); border-bottom:0; background:white; }
+.service-feature:last-child { border-bottom:2px solid var(--ink); }
+.service-feature:nth-child(even) .service-feature-copy { order:2; border-left:2px solid var(--ink); border-right:0; }
+.service-feature-copy { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding:clamp(2rem,5vw,4.5rem); border-right:2px solid var(--ink); }
+.service-feature-copy > span { color:var(--magenta); font-size:.72rem; font-weight:950; letter-spacing:.16em; }
+.service-feature-copy h2 { max-width:540px; margin-top:1.5rem; font-size:clamp(2.4rem,5vw,5rem); font-weight:950; letter-spacing:-.06em; line-height:.86; text-transform:uppercase; }
+.service-feature-copy p { max-width:500px; margin-top:1.8rem; color:#555; font-size:1rem; font-weight:620; line-height:1.8; }
+.service-feature-copy small { margin-top:2.2rem; padding:.55rem .8rem; background:var(--yellow); font-weight:900; text-transform:uppercase; letter-spacing:.12em; }
+.service-feature-image { position:relative; min-height:420px; overflow:hidden; isolation:isolate; }
+.service-feature-image img { transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .7s; animation:service-image-drift 8s ease-in-out infinite alternate; }
+.service-feature:nth-child(even) .service-feature-image img { animation-delay:-4s; }
+.service-feature:hover .service-feature-image img { transform:scale(1.08) rotate(.6deg); filter:saturate(1.15); }
+.service-image-sweep { position:absolute; z-index:2; inset:-30% auto -30% -50%; width:30%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent); transform:skewX(-16deg); animation:service-shine 5.5s ease-in-out infinite; }
+.service-feature-image b { position:absolute; z-index:3; right:1.2rem; bottom:-.22em; color:white; font-size:clamp(5rem,12vw,11rem); font-weight:950; line-height:1; opacity:.85; text-shadow:5px 5px 0 var(--ink); }
+.services-cta { background:var(--ink); }
+
+/* Contact and map */
+.contact-page-hero { position:relative; overflow:hidden; background:var(--ink); }
+.contact-page-hero::after { content:""; position:absolute; right:-12rem; bottom:-18rem; width:42rem; height:42rem; border:7rem solid var(--cyan); border-radius:50%; opacity:.18; }
+.contact-page-grid { background:var(--yellow); }
+.contact-cards { display:grid; margin-top:3rem; border:2px solid var(--ink); }
+.contact-cards > * { position:relative; display:grid; gap:.55rem; padding:1.4rem; border-bottom:2px solid var(--ink); background:white; }
+.contact-cards > *:last-child { border-bottom:0; }
+.contact-cards small { color:#666; font-size:.65rem; font-weight:950; letter-spacing:.15em; text-transform:uppercase; }
+.contact-cards strong { overflow-wrap:anywhere; font-size:.9rem; }
+.contact-cards span { position:absolute; right:1.4rem; top:1.25rem; font-size:1.4rem; }
+.contact-cards a { transition:background .25s,transform .25s; }
+.contact-cards a:hover { z-index:1; background:var(--cyan); transform:translateX(6px); }
+.location-section { background:#f5f0e5; }
+.location-heading { display:grid; grid-template-columns:1fr auto; align-items:end; gap:3rem; padding-top:6rem; padding-bottom:2.5rem; }
+.location-heading > div:last-child { display:grid; justify-items:end; gap:.8rem; font-weight:800; }
+.location-heading a { padding-bottom:.25rem; border-bottom:2px solid var(--ink); font-size:.78rem; font-weight:950; text-transform:uppercase; letter-spacing:.1em; }
+.map-frame { position:relative; min-height:560px; overflow:hidden; border:2px solid var(--ink); box-shadow:18px 18px 0 var(--magenta); background:#ddd; }
+.map-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; filter:saturate(.72) contrast(1.08); }
+.map-label { position:absolute; left:1.5rem; bottom:1.5rem; display:flex; align-items:center; gap:1rem; padding:1rem 1.3rem; border:2px solid var(--ink); background:var(--yellow); box-shadow:7px 7px 0 var(--ink); }
+.map-label > span { color:var(--magenta); font-size:1.6rem; animation:map-pulse 1.8s ease-in-out infinite; }
+.map-label div { display:grid; gap:.2rem; }
+.map-label b { font-size:.82rem; text-transform:uppercase; }
+.map-label small { font-size:.68rem; font-weight:700; }
+
+@keyframes service-image-drift { from { transform:scale(1.03) translate3d(-1.5%,-1%,0); } to { transform:scale(1.1) translate3d(1.5%,1%,0); } }
+@keyframes service-shine { 0%,20% { left:-50%; opacity:0; } 38% { opacity:.75; } 58%,100% { left:125%; opacity:0; } }
+@keyframes map-pulse { 50% { transform:scale(1.28); filter:drop-shadow(0 0 6px var(--magenta)); } }
+
+@media (max-width:850px) {
+  .service-feature { grid-template-columns:1fr; }
+  .service-feature:nth-child(even) .service-feature-copy { order:0; border-left:0; }
+  .service-feature-copy { border-right:0; border-bottom:2px solid var(--ink); }
+  .location-heading { grid-template-columns:1fr; }
+  .location-heading > div:last-child { justify-items:start; }
+}
+
+@media (max-width:520px) {
+  .service-feature-image { min-height:330px; }
+  .map-frame { min-height:430px; box-shadow:9px 9px 0 var(--magenta); }
+  .map-label { left:.8rem; right:.8rem; bottom:.8rem; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .service-feature-image img,.service-image-sweep,.map-label > span { animation:none; }
+}

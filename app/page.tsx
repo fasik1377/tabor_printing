@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { SiteFooter, SiteHeader, useLanguage } from "./site-chrome";
+import { SiteFooter, SiteHeader, SocialIcon, useLanguage } from "./site-chrome";
 
 const copy = {
   en: {
@@ -56,9 +56,9 @@ const copy = {
 };
 
 const showcase = [
-  ["Premium packaging", "https://images.unsplash.com/photo-1608755728617-aefab37d2edd?auto=format&fit=crop&w=1100&q=85"],
-  ["Corporate stationery", "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1100&q=85"],
-  ["Campaign design", "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1100&q=85"],
+  ["Book cover printing", "/images/book_cover3.jpg"],
+  ["Corporate stationery", "/images/business_card.jpg"],
+  ["Dashen Bank campaign", "/images/dashen_bank_ad.jpg"],
 ];
 
 export default function Home() {
@@ -69,7 +69,7 @@ export default function Home() {
     <main className="overflow-hidden bg-cream text-ink">
       <section className="hero relative min-h-screen">
         <Image
-          src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=2000&q=90"
+          src="/images/background_cover.jpg"
           alt=""
           fill
           priority
@@ -106,11 +106,14 @@ export default function Home() {
           </div>
           <div className="hero-stage" aria-label="Animated print showcase">
             <div className="hero-card hero-card-back">
-              <Image src={showcase[1][1]} alt={showcase[1][0]} fill sizes="45vw" className="object-cover" />
+              {["/images/staff.jpg", "/images/cloth_for_event.jpg", "/images/wall_advertising3.jpg"].map((src, index) => <Image key={src} src={src} alt={index === 0 ? "Tabor Printing Press staff" : "Tabor completed print work"} fill sizes="45vw" className={`hero-cycle-image hero-cycle-${index + 1} object-cover`} />)}
             </div>
             <div className="hero-card hero-card-main">
-              <Image src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1200&q=90" alt="Colorful print samples on a studio table" fill priority sizes="(min-width:1024px) 42vw, 90vw" className="object-cover" />
-              <span className="hero-caption">Color / Craft / Impact</span>
+              {["/images/tabor.jpg", "/images/garment.jpg", "/images/cloth_for_event0.jpg"].map((src, index) => <Image key={src} src={src} alt={index === 0 ? "Tabor Printing Press team and workplace" : "Tabor custom printing work"} fill priority={index === 0} sizes="(min-width:1024px) 42vw, 90vw" className={`hero-cycle-image hero-cycle-${index + 1} object-cover`} />)}
+              <span className="hero-caption">Tabor / Color / Craft / Impact</span>
+            </div>
+            <div className="hero-flyer-deck" aria-label="Animated Tabor flyer designs">
+              {["/images/flyer2.jpg", "/images/flyer.jpg", "/images/flyer3.jpg"].map((src, index) => <div className={`hero-flyer-card hero-flyer-${index + 1}`} key={src}><Image src={src} alt={`Tabor flyer design ${index + 1}`} fill sizes="22vw" className="object-cover" /></div>)}
             </div>
             <span className="color-dot cyan" /><span className="color-dot magenta" /><span className="color-dot black" />
           </div>
@@ -123,6 +126,17 @@ export default function Home() {
                 <span>ዲዛይን</span><b>✦</b><span>ህትመት</span><b>✦</b><span>ማጠናቀቅ</span><b>✦</b><span>ማድረስ</span><b>✦</b>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="people-section px-5 py-28 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="people-heading"><div><p className="section-label">{language === "am" ? "የታቦር ቡድን" : "People behind the print"}</p><h2 className="display-title mt-4">{language === "am" ? "ሀሳብዎን የሚያትም ቡድን።" : "The team that makes your ideas tangible."}</h2></div><p>{language === "am" ? "ከዲዛይን እስከ ህትመትና ማጠናቀቂያ፣ ቡድናችን እያንዳንዱን ስራ በጥንቃቄ ይሰራል።" : "From design and production to finishing, our staff brings practical experience and close attention to every job."}</p></div>
+          <div className="people-grid">
+            <article className="people-card people-card-main"><div><Image src="/images/staff.jpg" alt="Tabor Printing Press staff" fill sizes="(min-width:1024px) 58vw, 94vw" className="object-cover" /></div><span>Our team / Hawassa</span></article>
+            <article className="people-card"><div><Image src="/images/garment.jpg" alt="Tabor garment printing work" fill sizes="(min-width:1024px) 30vw, 94vw" className="object-cover" /></div><span>Garment printing</span></article>
+            <article className="people-card bank-feature"><div><Image src="/images/debub_global_logo.jpg" alt="Debub Global Bank logo" fill sizes="(min-width:1024px) 22vw, 70vw" className="object-contain" /></div><span>Featured client work / Debub Global Bank</span></article>
           </div>
         </div>
       </section>
@@ -184,14 +198,14 @@ export default function Home() {
             <p className="section-label text-yellow">Contact / ያግኙን</p>
             <h2 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[.92] sm:text-7xl">{t.ready}</h2>
             <p className="mt-7 max-w-lg text-lg leading-8 text-white/60">{language === "am" ? "ስለ ህትመትዎ መጠን፣ ብዛትና የጊዜ ገደብ ይንገሩን። በተግባራዊ ምክር እንመለሳለን።" : "Tell us the size, quantity, and timing of your print job. We’ll reply with practical guidance and a clear next step."}</p>
-            <div className="contact-details"><a href="mailto:hello@taborprintingpress.com">hello@taborprintingpress.com ↗</a><a href="tel:+251000000000">+251 000 000 000 ↗</a><span>Hawassa, Ethiopia</span></div>
+            <div className="contact-details"><a href="mailto:tabordigitaladvert@gmail.com">tabordigitaladvert@gmail.com ↗</a><a href="tel:+251916038585">0916038585 ↗</a><a href="tel:+251967213619">0967213619 ↗</a><div className="social-icon-links"><a href="https://t.me/Tabro_advert" target="_blank" rel="noreferrer" aria-label="Tabor on Telegram"><SocialIcon name="telegram" /></a><a href="https://www.facebook.com/profile.php?id=100070440477160" target="_blank" rel="noreferrer" aria-label="Tabor on Facebook"><SocialIcon name="facebook" /></a></div><span>Hawassa, Ethiopia</span></div>
           </div>
           <form className="quote-form" onSubmit={(event) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
             const subject = encodeURIComponent(`Print quote: ${data.get("project")}`);
             const body = encodeURIComponent(`Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nProject: ${data.get("project")}\n\n${data.get("message")}`);
-            window.location.href = `mailto:hello@taborprintingpress.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:tabordigitaladvert@gmail.com?subject=${subject}&body=${body}`;
           }}>
             <div className="form-row"><label>{language === "am" ? "ስም" : "Your name"}<input name="name" required placeholder={language === "am" ? "ሙሉ ስም" : "Full name"} /></label><label>{language === "am" ? "ስልክ" : "Phone"}<input name="phone" required placeholder="+251..." /></label></div>
             <label>{language === "am" ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging"><option>Packaging</option><option>Business stationery</option><option>Posters & banners</option><option>Books & school materials</option><option>Other</option></select></label>

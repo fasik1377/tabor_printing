@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: "Tabor Printing Press | Hawassa, Ethiopia",
   description:
     "Modern printing press in Hawassa, Ethiopia for packaging, stationery, posters, flyers, and business print production.",
+  icons: {
+    icon: [{ url: "/images/logo.jpg", type: "image/jpeg" }],
+    shortcut: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
+  },
 };
 
 export default function RootLayout({

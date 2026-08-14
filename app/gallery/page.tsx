@@ -5,12 +5,17 @@ import { useState } from "react";
 import { SiteFooter, SiteHeader, useLanguage } from "../site-chrome";
 
 const works = [
-  ["Brand stationery", "የድርጅት መገልገያ", "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=85", "identity"],
-  ["Premium boxes", "የጥራት ማሸጊያ", "https://images.unsplash.com/photo-1608755728617-aefab37d2edd?auto=format&fit=crop&w=1200&q=85", "packaging"],
-  ["Campaign posters", "የዘመቻ ፖስተሮች", "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=85", "campaign"],
-  ["Color stories", "የቀለም ታሪኮች", "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=85", "editorial"],
-  ["Paper detail", "የወረቀት ዝርዝር", "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85", "finish"],
-  ["Event materials", "የዝግጅት ቁሳቁስ", "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1200&q=85", "campaign"],
+  ["Brand stationery", "የድርጅት መገልገያ", "/images/business_card.jpg", "identity"],
+  ["Book covers", "የጥራት ማሸጊያ", "/images/book_cover1.jpg", "packaging"],
+  ["Campaign posters", "የዘመቻ ፖስተሮች", "/images/poster.jpg", "campaign"],
+  ["Flyer design", "የቀለም ታሪኮች", "/images/flyer.jpg", "editorial"],
+  ["Cloth printing", "የወረቀት ዝርዝር", "/images/cloth_printing5.jpg", "finish"],
+  ["Large-format advertising", "የዝግጅት ቁሳቁስ", "/images/bank_billboard.jpg", "campaign"],
+  ["Event cloth", "የዝግጅት ጨርቅ", "/images/cloth_for_event.jpg", "finish"],
+  ["Event branding", "የዝግጅት ብራንዲንግ", "/images/cloth_for_event0.jpg", "campaign"],
+  ["Wall campaign", "የግድግዳ ማስታወቂያ", "/images/wall_advertising3.jpg", "campaign"],
+  ["Dashen Bank advertising", "የዳሽን ባንክ ማስታወቂያ", "/images/dashen_bank_ad.jpg", "campaign"],
+  ["Party poster", "የድግስ ፖስተር", "/images/party_poster.jpg", "editorial"],
 ];
 
 export default function GalleryPage() {
@@ -19,7 +24,7 @@ export default function GalleryPage() {
   const [filter, setFilter] = useState("all");
   const filters = ["all", "identity", "packaging", "campaign", "editorial", "finish"];
   const filteredWorks = filter === "all" ? works : works.filter((work) => work[3] === filter);
-  return <main className="bg-ink text-white"><section className="gallery-hero"><SiteHeader dark /><div className="mx-auto max-w-7xl px-5 pb-20 pt-20 sm:px-8"><p className="section-label text-yellow">{am ? "የስራ ጋለሪ" : "Work gallery"}</p><h1 className="page-title mt-7 max-w-5xl">{am ? "የምንሰራውን ይመልከቱ።" : "See what print can do."}</h1><p className="mt-7 max-w-2xl text-xl font-medium leading-9 text-white/65">{am ? "ማሸጊያ፣ የድርጅት መለያ፣ ዘመቻና በጥንቃቄ የተጠናቀቁ የህትመት ስራዎች።" : "Packaging, identity, campaigns, and crafted print details—made to look memorable and work beautifully."}</p></div></section>
+  return <main className="bg-ink text-white"><section className="gallery-hero"><Image src="/images/flyer3.jpg" alt="" fill priority sizes="100vw" className="gallery-hero-background object-cover" /><div className="gallery-hero-wash" /><SiteHeader dark /><div className="gallery-hero-layout mx-auto max-w-7xl px-5 pb-20 pt-20 sm:px-8"><div><p className="section-label text-yellow">{am ? "የስራ ጋለሪ" : "Work gallery"}</p><h1 className="page-title mt-7 max-w-5xl">{am ? "የምንሰራውን ይመልከቱ።" : "See what print can do."}</h1><p className="mt-7 max-w-2xl text-xl font-medium leading-9 text-white/75">{am ? "ማሸጊያ፣ የድርጅት መለያ፣ ዘመቻና በጥንቃቄ የተጠናቀቁ የህትመት ስራዎች።" : "Packaging, identity, campaigns, and crafted print details—made to look memorable and work beautifully."}</p></div><div className="gallery-hero-cards"><div><Image src="/images/cloth_for_event0.jpg" alt="Printed event cloth" fill sizes="30vw" className="object-cover" /></div><div><Image src="/images/poster.jpg" alt="Tabor campaign poster" fill sizes="24vw" className="object-cover" /></div></div></div></section>
   <section className="gallery-page-slider pb-24">
     <div className="gallery-page-track">
       {Array(2).fill(null).map((_,copyIndex)=><div className="gallery-page-set" aria-hidden={copyIndex===1} key={copyIndex}>{works.map(([en,amharic,src,tag],i)=><article className="gallery-slide" key={`${copyIndex}-${en}`}><div className="relative h-[430px] overflow-hidden"><Image src={src} alt={am ? amharic : en} fill sizes="(min-width:1024px) 500px, 84vw" className="object-cover" /></div><div><h2>{am ? amharic : en}</h2><span>{tag} / 0{i+1}</span></div></article>)}</div>)}

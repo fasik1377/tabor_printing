@@ -61,6 +61,9 @@ const showcase = [
   ["Dashen Bank campaign", "/images/dashen_bank_ad.jpg"],
 ];
 
+const tshirts = ["/images/t-shirt.jpg", "/images/t-shirt1.jpg", "/images/t-shirt2.jpg", "/images/t-shirt3.jpg", "/images/t-shirt4.jpg", "/images/t-shirt5.jpg"];
+const serviceGalleryFilters = ["all", "all", "packaging", "identity", "editorial", "campaign"];
+
 export default function Home() {
   const { language } = useLanguage();
   const t = copy[language];
@@ -130,12 +133,32 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="tshirt-showcase px-5 py-28 sm:px-8" aria-labelledby="tshirt-heading">
+        <div className="mx-auto max-w-7xl">
+          <p className="section-label">{language === "am" ? "የቲሸርት ህትመት" : "Custom T-shirt printing"}</p>
+          <div className="tshirt-heading-row">
+            <h2 id="tshirt-heading" className="display-title">{language === "am" ? "ዲዛይንዎን በእንቅስቃሴ ይመልከቱ።" : "Your design, in motion."}</h2>
+            <p>{language === "am" ? "ለቡድን፣ ለዝግጅት እና ለንግድ ምልክት የሚሆኑ ግልጽ እና ዘላቂ ህትመቶች።" : "Bold, durable garment prints for teams, events, campaigns, and brands."}</p>
+          </div>
+          <div className="tshirt-3d-stage">
+            {tshirts.map((src, index) => <article className="tshirt-card" key={src}><div><Image src={src} alt={`Custom printed T-shirt design ${index + 1}`} fill sizes="(min-width:1024px) 28vw, 72vw" className="object-contain" /></div><span>T-shirt series / {String(index + 1).padStart(2, "0")}</span></article>)}
+          </div>
+          <Link className="text-link tshirt-gallery-link" href="/gallery">{t.viewGallery} ↗</Link>
+        </div>
+      </section>
+
+      <section className="cover-story" aria-label="Tabor Printing Press featured cover image">
+        <Image src="/images/background_cover.jpg" alt="Tabor Printing Press production and printed work" fill sizes="100vw" className="cover-story-image object-cover" />
+        <div className="cover-story-overlay" />
+        <div className="cover-story-copy"><span>Tabor / Hawassa</span><h2>{language === "am" ? "ሀሳብን ወደ ህትመት እንቀይራለን።" : "Ideas become something you can hold."}</h2></div>
+      </section>
+
       <section className="people-section px-5 py-28 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="people-heading"><div><p className="section-label">{language === "am" ? "የታቦር ቡድን" : "People behind the print"}</p><h2 className="display-title mt-4">{language === "am" ? "ሀሳብዎን የሚያትም ቡድን።" : "The team that makes your ideas tangible."}</h2></div><p>{language === "am" ? "ከዲዛይን እስከ ህትመትና ማጠናቀቂያ፣ ቡድናችን እያንዳንዱን ስራ በጥንቃቄ ይሰራል።" : "From design and production to finishing, our staff brings practical experience and close attention to every job."}</p></div>
           <div className="people-grid">
             <article className="people-card people-card-main"><div><Image src="/images/staff.jpg" alt="Tabor Printing Press staff" fill sizes="(min-width:1024px) 58vw, 94vw" className="object-cover" /></div><span>Our team / Hawassa</span></article>
-            <article className="people-card"><div><Image src="/images/garment.jpg" alt="Tabor garment printing work" fill sizes="(min-width:1024px) 30vw, 94vw" className="object-cover" /></div><span>Garment printing</span></article>
+            <article className="people-card garment-feature"><div><Image src="/images/garment.jpg" alt="Tabor garment printing work" fill sizes="(min-width:1024px) 30vw, 94vw" className="object-contain" /></div><span>Garment printing</span></article>
             <article className="people-card bank-feature"><div><Image src="/images/debub_global_logo.jpg" alt="Debub Global Bank logo" fill sizes="(min-width:1024px) 22vw, 70vw" className="object-contain" /></div><span>Featured client work / Debub Global Bank</span></article>
           </div>
         </div>
@@ -149,7 +172,7 @@ export default function Home() {
             <p className="max-w-xl text-lg font-medium leading-8 text-white/65">{t.servicesLead}</p>
           </div>
           <div className="mt-16 grid gap-px border border-white/20 bg-white/20 sm:grid-cols-2 lg:grid-cols-3">
-            {t.services.map((service, index) => <div key={service} className="service-card group"><span>0{index + 1}</span><i className={`service-icon service-icon-${index + 1}`} /><h3>{service}</h3><p>{language === "am" ? "ከዲዛይን እስከ ማጠናቀቅ በጥራት የሚሰራ።" : "Designed, produced, and finished with close attention to every detail."}</p><b>↗</b></div>)}
+            {t.services.map((service, index) => <Link href={`/gallery?filter=${serviceGalleryFilters[index]}#gallery-collection`} aria-label={`${service} — view matching gallery work`} key={service} className="service-card group"><span>0{index + 1}</span><i className={`service-icon service-icon-${index + 1}`} /><h3>{service}</h3><p>{language === "am" ? "ከዲዛይን እስከ ማጠናቀቅ በጥራት የሚሰራ።" : "Designed, produced, and finished with close attention to every detail."}</p><b>↗</b></Link>)}
           </div>
         </div>
       </section>

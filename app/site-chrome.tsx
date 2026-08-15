@@ -43,6 +43,7 @@ const nav = {
 export function SiteHeader({ dark = false }: { dark?: boolean }) {
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
   const t = nav[language];
   return (
     <header className={`site-header relative z-50 ${dark ? "text-white" : "text-ink"}`}>
@@ -54,12 +55,15 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
         </span>
         <span><b>{language === "am" ? "ታቦር" : "TABOR"}</b><small>{language === "am" ? "ማተሚያ ቤት" : "PRINTING PRESS"}</small></span>
       </Link>
-      <nav aria-label="Primary navigation">
-        <Link className={pathname === "/" ? "active" : ""} href="/">{t.home}</Link>
-        <Link className={pathname === "/about" ? "active" : ""} href="/about">{t.about}</Link>
-        <Link className={pathname === "/gallery" ? "active" : ""} href="/gallery">{t.gallery}</Link>
-        <Link className={pathname === "/services" ? "active" : ""} href="/services">{t.services}</Link>
-        <Link className={pathname === "/contact" ? "active" : ""} href="/contact">{t.contact}</Link>
+      <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} onClick={() => setMenuOpen((open) => !open)}>
+        <span /><span /><span />
+      </button>
+      <nav id="primary-navigation" className={menuOpen ? "menu-open" : ""} aria-label="Primary navigation">
+        <Link onClick={() => setMenuOpen(false)} className={pathname === "/" ? "active" : ""} href="/">{t.home}</Link>
+        <Link onClick={() => setMenuOpen(false)} className={pathname === "/about" ? "active" : ""} href="/about">{t.about}</Link>
+        <Link onClick={() => setMenuOpen(false)} className={pathname === "/gallery" ? "active" : ""} href="/gallery">{t.gallery}</Link>
+        <Link onClick={() => setMenuOpen(false)} className={pathname === "/services" ? "active" : ""} href="/services">{t.services}</Link>
+        <Link onClick={() => setMenuOpen(false)} className={pathname === "/contact" ? "active" : ""} href="/contact">{t.contact}</Link>
       </nav>
       <div className="language-switch" aria-label="Language selector">
         <button className={language === "en" ? "selected" : ""} onClick={() => setLanguage("en")}>EN</button>

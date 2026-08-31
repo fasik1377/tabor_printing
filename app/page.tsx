@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { SiteFooter, SiteHeader, SocialIcon, useLanguage } from "./site-chrome";
 
 const copy = {
@@ -63,6 +64,22 @@ const showcase = [
 
 const tshirts = ["/images/t-shirt.jpg", "/images/t-shirt1.jpg", "/images/t-shirt2.jpg", "/images/t-shirt3.jpg", "/images/t-shirt4.jpg", "/images/t-shirt5.jpg"];
 const serviceGalleryFilters = ["all", "all", "packaging", "identity", "editorial", "campaign"];
+
+const partners = [
+  ["Abune Gorgories School", "/images/partners/Abune_Gorgories_School.jpg"],
+  ["Africa Beza College", "/images/partners/Africa_Beza_College.jpg"],
+  ["Buladi Lions", "/images/partners/Buladi_Lions.jpg"],
+  ["Buy Ethiopian", "/images/partners/Buy_Ethiopian.jpg"],
+  ["Education Sustainable Development", "/images/partners/Education_Sustainable_Development.jpg"],
+  ["GT Import Export", "/images/partners/GT_import_export.jpg"],
+  ["Hawassa City Sport Club", "/images/partners/Hawassa_City_Sport_Club.jpg"],
+  ["Nice Distance School", "/images/partners/Nice_Distance_School.jpg"],
+  ["Nova Barber", "/images/partners/Nova_barber.jpg"],
+  ["Sidama Coffee", "/images/partners/sidama_coffee.jpg"],
+  ["Sidama Regional Chamber of Commerce", "/images/partners/Sidama_Regional_Chamber_of_Commerece.jpg"],
+  ["Sidama Trade Council Association", "/images/partners/sidama_trade_council_association.jpg"],
+  ["Sol Furniture", "/images/partners/Sol_Furniture.jpg"],
+];
 
 export default function Home() {
   const { language } = useLanguage();
@@ -200,6 +217,37 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="partners-section py-28" aria-labelledby="partners-heading">
+        <div className="partners-heading mx-auto max-w-7xl px-5 sm:px-8">
+          <div>
+            <p className="section-label">{language === "am" ? "የምንሰራቸው አጋሮች" : "Partners in print"}</p>
+            <h2 id="partners-heading" className="display-title mt-4">
+              {language === "am" ? "በእኛ የሚተማመኑ ድርጅቶች።" : "Trusted by organizations that make an impact."}
+            </h2>
+          </div>
+          <p>{language === "am" ? "ከትምህርት ቤቶች እና ንግዶች እስከ ማህበራት፣ ለእያንዳንዱ አጋር ጥራት ያለው ህትመት እናቀርባለን።" : "From schools and businesses to associations and community brands, we produce work they are proud to put their name on."}</p>
+        </div>
+        <div className="partners-stage" aria-label="Partner logos">
+          {[partners.slice(0, 7), partners.slice(7)].map((row, rowIndex) => (
+            <div className={`partners-rail partners-rail-${rowIndex + 1}`} key={rowIndex}>
+              {Array(2).fill(null).map((_, copyIndex) => (
+                <div className="partners-set" aria-hidden={copyIndex === 1} key={copyIndex}>
+                  {row.map(([name, src], index) => (
+                    <article className="partner-logo" style={{ "--partner-index": index } as CSSProperties} key={`${copyIndex}-${name}`}>
+                      <div className="partner-logo-face">
+                        <Image src={src} alt={copyIndex === 0 ? `${name} logo` : ""} fill sizes="(min-width:1024px) 220px, 160px" className="object-contain" />
+                      </div>
+                      <span>{name}</span>
+                    </article>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <p className="partners-note">13 partners / Hawassa and beyond</p>
       </section>
 
       <section className="process-section bg-yellow px-5 py-28 sm:px-8">

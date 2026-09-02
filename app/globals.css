@@ -191,8 +191,8 @@ a,button { -webkit-tap-highlight-color:transparent; }
 .partners-stage::before { left:0; background:linear-gradient(90deg,#fff,transparent); }
 .partners-stage::after { right:0; background:linear-gradient(-90deg,#fff,transparent); }
 .partners-rail { display:flex; width:max-content; transform-style:preserve-3d; will-change:transform; }
-.partners-rail-1 { animation:partners-scroll-left 34s linear infinite; }
-.partners-rail-2 { animation:partners-scroll-right 31s linear infinite; }
+.partners-rail-1 { animation:partners-scroll-left 34s linear infinite !important; animation-play-state:running; }
+.partners-rail-2 { animation:partners-scroll-right 31s linear infinite !important; animation-play-state:running; }
 .partners-set { display:flex; gap:1.5rem; padding-right:1.5rem; transform-style:preserve-3d; }
 .partner-logo { position:relative; flex:0 0 clamp(155px,18vw,230px); height:clamp(145px,16vw,195px); transform-style:preserve-3d; transform:rotateY(calc((var(--partner-index) - 3) * 2.4deg)) rotateX(3deg) translateZ(calc((var(--partner-index) % 3) * 7px)); transition:transform .45s cubic-bezier(.2,.75,.2,1),filter .45s; filter:drop-shadow(10px 14px 10px rgba(11,11,11,.17)); }
 .partner-logo::before { content:""; position:absolute; inset:9px -9px -9px 9px; border:2px solid var(--ink); background:var(--cyan); transform:translateZ(-18px); }

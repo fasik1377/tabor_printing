@@ -541,3 +541,21 @@ a,button { -webkit-tap-highlight-color:transparent; }
   .partners-rail-2 { transform:none; }
   .hero-cycle-image,.hero-flyer-card { opacity:0; }.hero-cycle-image:first-child,.hero-flyer-card:first-child { opacity:1; }
 }
+
+/* Ethiopian New Year welcome modal */
+.new-year-modal { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:1.25rem; }
+.new-year-backdrop { position:absolute; inset:0; border:0; background:rgba(11,11,11,.78); backdrop-filter:blur(5px); cursor:pointer; }
+.new-year-panel { position:relative; z-index:1; width:min(100%, 680px); overflow:hidden; padding:clamp(2.5rem,7vw,5rem) clamp(1.5rem,6vw,4.5rem) 3rem; border:3px solid var(--yellow); background:var(--ink); box-shadow:14px 14px 0 var(--magenta); text-align:center; animation:new-year-enter .55s cubic-bezier(.2,.8,.2,1); }
+.new-year-panel::before { content:""; position:absolute; inset:1rem; border:1px solid rgba(11,11,11,.24); pointer-events:none; }
+.new-year-panel > :not(.new-year-flowers):not(.new-year-close) { position:relative; z-index:6; }
+.new-year-close { position:absolute !important; z-index:20; inset:1rem 1rem auto auto !important; display:grid; width:2.5rem; height:2.5rem; margin:0; place-items:center; border:2px solid var(--yellow); background:var(--ink); color:var(--yellow); font-size:1.6rem; line-height:1; cursor:pointer; }
+.new-year-kicker { position:relative; z-index:3; margin:0 0 1rem; color:var(--cyan); font-size:.7rem; font-weight:950; letter-spacing:.2em; text-transform:uppercase; }
+.new-year-panel h2 { position:relative; z-index:3; margin:0; color:var(--yellow); font-size:clamp(2rem,6vw,4.2rem); font-weight:950; line-height:.95; letter-spacing:0; text-transform:uppercase; }
+.new-year-amharic { position:relative; z-index:3; margin:1.4rem 0 .8rem; color:var(--magenta); font-family:serif; font-size:clamp(1.3rem,3.5vw,2.1rem); font-weight:800; line-height:1.35; }
+.new-year-note { position:relative; z-index:3; max-width:30rem; margin:0 auto 1.8rem; color:white; font-size:.9rem; font-weight:700; line-height:1.5; }
+.new-year-action { position:relative; z-index:2; margin-inline:auto; }
+.new-year-flowers { position:absolute; z-index:5; inset:0; overflow:hidden; pointer-events:none; }
+.new-year-flowers img { position:absolute !important; left:calc(var(--flower-x) * 1%); top:0; width:clamp(1.5rem,5vw,4rem); height:auto; opacity:.95; object-fit:contain; filter:drop-shadow(0 2px 3px rgba(0,0,0,.65)); animation:new-year-flower-fall 9s linear infinite; animation-delay:var(--flower-delay); }
+@keyframes new-year-enter { from { opacity:0; transform:translateY(22px) scale(.96) rotate(-1deg); } to { opacity:1; transform:none; } }
+@keyframes new-year-flower-fall { 0% { transform:translate3d(-7vw,-120%,0) rotate(-25deg) scale(.55); opacity:0; } 12% { opacity:.95; } 28% { transform:translate3d(6vw,-45%,0) rotate(95deg) scale(.86); } 48% { transform:translate3d(-5vw,8%,0) rotate(205deg) scale(1.05); } 68% { transform:translate3d(8vw,60%,0) rotate(300deg) scale(.9); } 88% { opacity:.95; } 100% { transform:translate3d(-6vw,125%,0) rotate(455deg) scale(.68); opacity:0; } }
+@media (prefers-reduced-motion:reduce) { .new-year-panel { animation:none; } }

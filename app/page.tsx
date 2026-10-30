@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, type CSSProperties } from "react";
-import { SiteFooter, SiteHeader, SocialIcon, useLanguage } from "./site-chrome";
+import type { CSSProperties } from "react";
+import { projectTypes, SiteFooter, SiteHeader, SocialIcon, useLanguage } from "./site-chrome";
 
 const copy = {
   en: {
@@ -84,39 +84,9 @@ const partners = [
 export default function Home() {
   const { language } = useLanguage();
   const t = copy[language];
-  const [showNewYearModal, setShowNewYearModal] = useState(true);
-
-  useEffect(() => {
-    if (!showNewYearModal) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setShowNewYearModal(false);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [showNewYearModal]);
 
   return (
     <main className="overflow-hidden bg-cream text-ink">
-      {showNewYearModal && (
-        <div className="new-year-modal" role="dialog" aria-modal="true" aria-labelledby="new-year-title">
-          <button className="new-year-backdrop" aria-label="Close celebration message" onClick={() => setShowNewYearModal(false)} />
-          <div className="new-year-panel">
-            <div className="new-year-flowers" aria-hidden="true">
-              {Array.from({ length: 52 }, (_, index) => <Image key={index} src="/images/adey_abeba.png" alt="" width={72} height={72} style={{ "--flower-index": index, "--flower-x": (index * 17) % 108, "--flower-delay": `${(index * -0.42).toFixed(2)}s` } as CSSProperties} />)}
-            </div>
-            <button className="new-year-close" aria-label="Close celebration message" onClick={() => setShowNewYearModal(false)}>×</button>
-            <p className="new-year-kicker">Meskerem 1 · 2019</p>
-            <h2 id="new-year-title">Happy Ethiopian 2019 New Year</h2>
-            <p className="new-year-amharic">እንኳን ለ2019 ዓ.ም በሰላም አደረሳችሁ!</p>
-            <p className="new-year-note">Wishing you a bright year filled with peace, joy, and new beginnings.</p>
-            <button className="button button-dark new-year-action" onClick={() => setShowNewYearModal(false)}>Continue to Tabor <span>→</span></button>
-          </div>
-        </div>
-      )}
       <section className="hero relative min-h-screen">
         <Image
           src="/images/background_cover.jpg"
@@ -277,7 +247,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="partners-note">13 partners / Hawassa and beyond</p>
+        <p className="partners-note">{language === "am" ? `${partners.length} አጋሮች / ሐዋሳና ከዚያም በላይ` : `${partners.length} partners / Hawassa and beyond`}</p>
       </section>
 
       <section className="process-section bg-yellow px-5 py-28 sm:px-8">
@@ -308,8 +278,8 @@ export default function Home() {
             const body = encodeURIComponent(`Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nProject: ${data.get("project")}\n\n${data.get("message")}`);
             window.location.href = `mailto:tabordigitaladvert@gmail.com?subject=${subject}&body=${body}`;
           }}>
-            <div className="form-row"><label>{language === "am" ? "ስም" : "Your name"}<input name="name" required placeholder={language === "am" ? "ሙሉ ስም" : "Full name"} /></label><label>{language === "am" ? "ስልክ" : "Phone"}<input name="phone" required placeholder="+251..." /></label></div>
-            <label>{language === "am" ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging"><option>Packaging</option><option>Business stationery</option><option>Posters & banners</option><option>Books & school materials</option><option>Other</option></select></label>
+            <div className="form-row"><label>{language === "am" ? "ስም" : "Your name"}<input name="name" autoComplete="name" required placeholder={language === "am" ? "ሙሉ ስም" : "Full name"} /></label><label>{language === "am" ? "ስልክ" : "Phone"}<input name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="+251..." /></label></div>
+            <label>{language === "am" ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging">{projectTypes.map(([value, amLabel]) => <option key={value} value={value}>{language === "am" ? amLabel : value}</option>)}</select></label>
             <label>{language === "am" ? "ዝርዝር" : "Project details"}<textarea name="message" required rows={4} placeholder={language === "am" ? "መጠን፣ ብዛት፣ ጊዜ..." : "Size, quantity, deadline..."} /></label>
             <button className="button button-yellow" type="submit">{t.contact} ↗</button>
           </form>

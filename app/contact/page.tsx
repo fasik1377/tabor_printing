@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { SiteFooter, SiteHeader, SocialIcon, useLanguage } from "../site-chrome";
+import { projectTypes, SiteFooter, SiteHeader, SocialIcon, useLanguage } from "../site-chrome";
 
 const mapUrl = "https://www.openstreetmap.org/export/embed.html?bbox=38.47344%2C7.04159%2C38.49344%2C7.06159&layer=mapnik&marker=7.05159%2C38.48344";
 const directionsUrl = "https://www.google.com/maps/search/?api=1&query=former+Warka+Hotel+near+South+Star+International+Hotel+Hawassa";
@@ -29,8 +29,8 @@ export default function ContactPage() {
     <section className="contact-page-grid px-5 py-24 sm:px-8"><div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[.75fr_1fr]">
       <div><p className="section-label">{am ? "ይጻፉልን" : "Start a conversation"}</p><h2 className="display-title mt-5">{am ? "ፕሮጀክትዎን ይንገሩን።" : "Tell us about your project."}</h2><div className="contact-cards"><a href="mailto:tabordigitaladvert@gmail.com"><small>Email</small><strong>tabordigitaladvert@gmail.com</strong><span>↗</span></a><a href="tel:+251916038585"><small>{am ? "ስልክ" : "Phone"}</small><strong>0916038585</strong><span>↗</span></a><a href="tel:+251967213619"><small>{am ? "ስልክ" : "Phone"}</small><strong>0967213619</strong><span>↗</span></a><div className="contact-social-icons"><a href="https://t.me/Tabro_advert" target="_blank" rel="noreferrer" aria-label="Tabor on Telegram"><SocialIcon name="telegram" /></a><a href="https://www.facebook.com/profile.php?id=100070440477160" target="_blank" rel="noreferrer" aria-label="Tabor on Facebook"><SocialIcon name="facebook" /></a></div><div><small>{am ? "ሰዓት" : "Hours"}</small><strong>{am ? "ሰኞ–ቅዳሜ / 8:00–6:00" : "Mon–Sat / 8:00–6:00"}</strong></div></div></div>
       <form className="quote-form" onSubmit={(event) => { event.preventDefault(); const data = new FormData(event.currentTarget); const subject = encodeURIComponent(`Print quote: ${data.get("project")}`); const body = encodeURIComponent(`Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nProject: ${data.get("project")}\n\n${data.get("message")}`); window.location.href = `mailto:tabordigitaladvert@gmail.com?subject=${subject}&body=${body}`; }}>
-        <div className="form-row"><label>{am ? "ስም" : "Your name"}<input name="name" required placeholder={am ? "ሙሉ ስም" : "Full name"} /></label><label>{am ? "ስልክ" : "Phone"}<input name="phone" required placeholder="+251..." /></label></div>
-        <label>{am ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging"><option>Packaging</option><option>Business stationery</option><option>Posters & banners</option><option>Books & school materials</option><option>Other</option></select></label>
+        <div className="form-row"><label>{am ? "ስም" : "Your name"}<input name="name" autoComplete="name" required placeholder={am ? "ሙሉ ስም" : "Full name"} /></label><label>{am ? "ስልክ" : "Phone"}<input name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="+251..." /></label></div>
+        <label>{am ? "የፕሮጀክት አይነት" : "Project type"}<select name="project" defaultValue="Packaging">{projectTypes.map(([value, amLabel]) => <option key={value} value={value}>{am ? amLabel : value}</option>)}</select></label>
         <label>{am ? "ዝርዝር" : "Project details"}<textarea name="message" required rows={5} placeholder={am ? "መጠን፣ ብዛት፣ ጊዜ..." : "Size, quantity, deadline..."} /></label><button className="button button-yellow" type="submit">{am ? "መልዕክት ይላኩ" : "Send project details"} ↗</button>
       </form>
     </div></section>
